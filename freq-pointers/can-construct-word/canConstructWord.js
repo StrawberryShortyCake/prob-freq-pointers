@@ -21,34 +21,43 @@
 Constraints: time complexity: O(w + k) (if w is the length of word and k is the length of letters)
  */
 
+
+
+/**
+ *
+ * @param {*} word
+ * @param {*} letters
+ * @returns true if there are enough letters to form word given
+ */
+
 function canConstructWord(word, letters) {
 
-    function createFreqCounter(letterString) {
-        const freqCounter = {};
-        for (let letter of letterString) {
-            if (freqCounter[letter] === undefined) {
-                freqCounter[letter] = 1;
-            } else {
-                freqCounter[letter]++;
-            }
-        }
-        return freqCounter;
+  function createFreqCounter(letterString) {
+    const freqCounter = {};
+    for (let letter of letterString) {
+      if (freqCounter[letter] === undefined) {
+        freqCounter[letter] = 1;
+      } else {
+        freqCounter[letter]++;
+      }
+    }
+    return freqCounter;
+  }
+
+  const wordFreqCounter = createFreqCounter(word);
+  const letterFreqCounter = createFreqCounter(letters);
+
+  for (const letter in wordFreqCounter) {
+    if (!(letterFreqCounter[letter])) {
+      return false;
     }
 
-    const wordFreqCounter = createFreqCounter(word);
-    const letterFreqCounter = createFreqCounter(letters);
-
-    for (const letter in wordFreqCounter) {
-        if (!(letterFreqCounter[letter])) {
-            return false;
-        }
-
-        if (!(letterFreqCounter[letter] >= wordFreqCounter[letter])) {
-            return false;
-        }
+    if (!(letterFreqCounter[letter] >= wordFreqCounter[letter])) {
+      return false;
     }
+  }
 
-    return true;
+  return true;
 }
 
 export { canConstructWord };
