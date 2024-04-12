@@ -19,45 +19,49 @@
  * 4) return false if mismatch
  * 5) return true by default at the end
 Constraints: time complexity: O(w + k) (if w is the length of word and k is the length of letters)
+>> still linear
+>> not just O(n) because w and k are variable inputs and we don't know if they equal
  */
 
 
 
 /**
- *
- * @param {*} word
- * @param {*} letters
- * @returns true if there are enough letters to form word given
+ * given 2 strings, letters and word, return true
+ * if there are enough letters to form the word given
  */
 
 function canConstructWord(word, letters) {
 
-  function createFreqCounter(letterString) {
-    const freqCounter = {};
-    for (let letter of letterString) {
-      if (freqCounter[letter] === undefined) {
-        freqCounter[letter] = 1;
-      } else {
-        freqCounter[letter]++;
-      }
-    }
-    return freqCounter;
-  }
-
-  const wordFreqCounter = createFreqCounter(word);
-  const letterFreqCounter = createFreqCounter(letters);
-
-  for (const letter in wordFreqCounter) {
-    if (!(letterFreqCounter[letter])) {
-      return false;
+    function createFreqCounter(letterString) {
+        const freqCounter = {};
+        for (let letter of letterString) {
+            if (freqCounter[letter] === undefined) {
+                freqCounter[letter] = 1;
+            } else {
+                freqCounter[letter]++;
+            }
+        }
+        return freqCounter;
     }
 
-    if (!(letterFreqCounter[letter] >= wordFreqCounter[letter])) {
-      return false;
-    }
-  }
+    // TODO: minimize the functions
+    // would be nice to extract it so it can be reused, unless what
+    // we are doing is very specific to only this function
 
-  return true;
+    const wordFreqCounter = createFreqCounter(word);
+    const letterFreqCounter = createFreqCounter(letters);
+
+    for (const letter in wordFreqCounter) { // TODO: condense statements
+        if (!(letterFreqCounter[letter])) {
+            return false;
+        }
+
+        if (!(letterFreqCounter[letter] >= wordFreqCounter[letter])) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 export { canConstructWord };

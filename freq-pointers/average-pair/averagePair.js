@@ -26,7 +26,8 @@
  *
  * @param {*} nums
  * @param {*} targetAvg
- * @returns true if nums contains pair average that equals to target average
+ * @returns intake an array of nums and a target average value,
+ * return true if the array contains a pair whose average equals to target average
  * false otherwise
  */
 
@@ -36,6 +37,7 @@ function averagePair(nums, targetAvg) {
   let pointerRight = nums.length - 1;
 
   while (pointerLeft < pointerRight) {
+    // TODO: start with eliminating whether we found the average (faster)
     const averageOfPointers = (nums[pointerLeft] + nums[pointerRight]) / 2;
     if (averageOfPointers > targetAvg) {
       pointerRight--;
